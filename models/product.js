@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const productSchema = new Schema({
   name: {
     type: String,
-    required: true,
+    required: [true, "Product name is required"],
   },
   price: {
     type: Number,
@@ -13,7 +13,15 @@ const productSchema = new Schema({
   },
   category: {
     type: String,
-    enum: ["fruit", "vegetable", "dairy"],
+    enum: [
+      "fruit",
+      "vegetable",
+      "dairy",
+      "poachery",
+      "mushroom",
+      "nut",
+      "grain",
+    ],
   },
 });
 
