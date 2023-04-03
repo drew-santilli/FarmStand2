@@ -1,19 +1,30 @@
 <% layout('layouts/boilerplate') %>
-<h1><%= product.name %></h1>
-<ul>
-  <li>Price: $<%= product.price %></li>
-  <li>
-    Category:
-    <a href="/products?category=<%= product.category%>"
-      ><%= product.category%></a
-    >
-  </li>
-</ul>
+<div class="row">
+  <div class="col-6 offset-3">
+    <div class="card mb-3">
+      <h1><%= product.name %></h1>
+      <ul>
+        <li>Price: $<%= product.price %></li>
+        <li>
+          Category:
+          <a href="/products?category=<%= product.category%>"
+            ><%= product.category%></a
+          >
+        </li>
+      </ul>
 
-<form action="/products/<%= product._id %>?_method=DELETE" method="POST">
-  <button>Delete <%= product.name %></button>
-</form>
+      <form action="/products/<%= product._id %>?_method=DELETE" method="POST">
+        <button class="btn btn-danger">Delete <%= product.name %></button>
+        <a href="/products/<%= product._id %>/edit" class="btn btn-warning"
+          >Edit <%= product.name %></a
+        >
+      </form>
 
-<a href="/products/<%= product._id %>/edit">Edit <%= product.name %></a>
+      <div>
+        <h2>Carried By: <%= product.farm.name %></h2>
+      </div>
 
-<a href="/products">All Products</a>
+      <a href="/products">All Products</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<% layout('layouts/boilerplate') %>
+<div class="row">
+  <div class="col-6 offset-3">
+    <div class="card mb-3">
+      <h1><%= farm.name %></h1>
+      <ul>
+        <li><%= farm.city %></li>
+
+        <li>Email: <%= farm.email %></li>
+      </ul>
+
+      <h2>Products</h2>
+      <ul>
+        <% for (let product of farm.products) { %>
+        <li><a href="/products/<%= product._id %>"><%= product.name %></a></li>
+        <% } %>
+      </ul>
+
+      <!-- <form action="/products/?_method=DELETE" method="POST">
+        <button class="btn btn-danger">Delete </button>
+        <a href="/products//edit" class="btn btn-warning"
+          >Edit </a
+        >
+      </form> -->
+      <div>
+        <a href="/farms/<%= farm._id %>/products/new">Add Product</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <a href="/products">All Products</a>
+  <a href="/farms">All Farms</a>
+</div>
+
+<form action="/farms/<%= farm._id %>?_method=DELETE" method="POST">
+  <button>Delete <%= farm.name %></button>
+</form>

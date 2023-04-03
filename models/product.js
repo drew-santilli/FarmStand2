@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const productSchema = new Schema({
   name: {
@@ -21,7 +21,14 @@ const productSchema = new Schema({
       "mushroom",
       "nut",
       "grain",
+      "pork",
+      "chicken",
+      "beef",
     ],
+  },
+  farm: {
+    type: Schema.Types.ObjectId,
+    ref: "Farm",
   },
 });
 

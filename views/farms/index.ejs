@@ -1,0 +1,9 @@
+<% layout('layouts/boilerplate') %>
+<div class="container text-center">
+  <h1>Farms</h1>
+  <% for (let farm of farms) {%>
+  <ul>
+    <li><a href="/farms/<%= farm._id %>"><%= farm.name %></a></li>
+  </ul>
+  <% } %>
+</div>

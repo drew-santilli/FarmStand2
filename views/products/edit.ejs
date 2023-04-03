@@ -1,5 +1,7 @@
 <% layout('layouts/boilerplate') %>
     <h1>Edit Product</h1>
+
+   
     <form action="/products/<%= product._id %>?_method=PUT" method="POST">
       <label for="name" id="name-label"><%= product.name %></label>
       <input
@@ -22,5 +24,6 @@
         <option value="<%= category %>" <%= product.category === category ? 'selected': '' %>><%= category %></option>
         <% } %>
       </select>
-      <button>Submit</button>
+      <button class="btn btn-success">Submit</button>
     </form>
+  
