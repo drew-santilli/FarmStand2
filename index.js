@@ -1,7 +1,15 @@
-const e = require("express");
 const express = require("express");
+const app = express();
 const mongoose = require("mongoose");
+const session = require("express-session");
+const flash = require("connect-flash");
 const path = require("path");
+
+const sessionOptions = {
+  secret: "thisisnotagoodsecret",
+  resave: false,
+  saveUninitialized: false,
+};
 
 const Product = require("./models/product");
 const Farm = require("./models/farm");
@@ -26,8 +34,6 @@ mongoose
     console.log(err);
   });
 
-const app = express();
-
 app.engine("ejs", engine);
 
 app.set("views", path.join(__dirname, "views"));
@@ -35,6 +41,8 @@ app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(session(sessionOptions));
+app.use(flash());
 
 const categories = [
   "fruit",
@@ -57,6 +65,11 @@ function validatePassword(req, res, next) {
   throw new AppError("PASSWORD IS NEEDED", 401);
 }
 
+app.use((req, res, next) => {
+  res.locals.messages = req.flash("success");
+  next();
+});
+
 // Farm Routes
 
 app.get("/farms", async (req, res) => {
@@ -77,7 +90,7 @@ app.delete("/farms/:id", async (req, res) => {
 app.post("/farms", async (req, res, next) => {
   const farm = new Farm(req.body);
   await farm.save();
-  console.log(farm);
+  req.flash("success", "Successfully made a new farm!");
   res.redirect("/farms");
 });
 
